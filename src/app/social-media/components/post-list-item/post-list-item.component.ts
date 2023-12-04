@@ -3,11 +3,12 @@ import {CommonModule} from '@angular/common';
 import {Post} from "../../models/post.model";
 import {MatCardModule} from "@angular/material/card";
 import {CommentsComponent} from "../../../shared/components/comments/comments.component";
+import {ShortenPipe} from "../../../shared/pipes/shorten.pipe";
 
 @Component({
   selector: 'app-post-list-item',
   standalone: true,
-  imports: [CommonModule, MatCardModule, CommentsComponent],
+  imports: [CommonModule, MatCardModule, CommentsComponent, ShortenPipe],
   templateUrl: './post-list-item.component.html',
   styleUrl: './post-list-item.component.scss'
 })
