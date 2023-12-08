@@ -7,11 +7,12 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
+import {TimeAgoPipe} from "../../pipes/time-ago.pipe";
 
 @Component({
   selector: 'app-comments',
   standalone: true,
-    imports: [CommonModule, MatListModule, MatLineModule, MatInputModule, MatButtonModule, MatIconModule, ReactiveFormsModule],
+  imports: [CommonModule, MatListModule, MatLineModule, MatInputModule, MatButtonModule, MatIconModule, ReactiveFormsModule, TimeAgoPipe],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.scss'
 })

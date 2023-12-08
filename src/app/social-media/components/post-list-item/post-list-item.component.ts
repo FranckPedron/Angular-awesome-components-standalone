@@ -5,11 +5,12 @@ import {MatCardModule} from "@angular/material/card";
 import {CommentsComponent} from "../../../shared/components/comments/comments.component";
 import {ShortenPipe} from "../../../shared/pipes/shorten.pipe";
 import {UsernamePipe} from "../../../shared/pipes/username.pipe";
+import {TimeAgoPipe} from "../../../shared/pipes/time-ago.pipe";
 
 @Component({
   selector: 'app-post-list-item',
   standalone: true,
-  imports: [CommonModule, MatCardModule, CommentsComponent, ShortenPipe, UsernamePipe],
+  imports: [CommonModule, MatCardModule, CommentsComponent, ShortenPipe, UsernamePipe, TimeAgoPipe],
   templateUrl: './post-list-item.component.html',
   styleUrl: './post-list-item.component.scss'
 })
