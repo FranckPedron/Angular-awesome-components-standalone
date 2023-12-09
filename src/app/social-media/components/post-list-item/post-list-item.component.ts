@@ -6,11 +6,12 @@ import {CommentsComponent} from "../../../shared/components/comments/comments.co
 import {ShortenPipe} from "../../../shared/pipes/shorten.pipe";
 import {UsernamePipe} from "../../../shared/pipes/username.pipe";
 import {TimeAgoPipe} from "../../../shared/pipes/time-ago.pipe";
+import {HighlightDirective} from "../../../shared/directives/highlight.directive";
 
 @Component({
   selector: 'app-post-list-item',
   standalone: true,
-  imports: [CommonModule, MatCardModule, CommentsComponent, ShortenPipe, UsernamePipe, TimeAgoPipe],
+  imports: [CommonModule, MatCardModule, CommentsComponent, ShortenPipe, UsernamePipe, TimeAgoPipe, HighlightDirective],
   templateUrl: './post-list-item.component.html',
   styleUrl: './post-list-item.component.scss'
 })
