@@ -1,23 +1,31 @@
 <mat-card [formGroup]="mainForm" class="main-form">
   <mat-card-title>Inscription</mat-card-title>
-  <mat-card class="form-card">
+  <mat-card class="form-card" formGroupName="personalInfo">
     <mat-card-subtitle>Informations personnelles</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Prénom</mat-label>
+        <input type="text" matInput formControlName="firstName"></mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Nom</mat-label>
+        <input type="text" matInput formControlName="lastName"></mat-form-field>
+    </div>
   </mat-card>
-  <mat-card class="form-card">
+  <mat-card class="form-card" formGroupName="contactPreference">
     <mat-card-subtitle>Comment préférez-vous être contacté(e) ?</mat-card-subtitle>
   </mat-card>
-  <mat-card class="form-card">
+  <mat-card class="form-card" formGroupName="email">
     <mat-card-subtitle>Email</mat-card-subtitle>
   </mat-card>
-  <mat-card class="form-card">
+  <mat-card class="form-card" formGroupName="phone">
     <mat-card-subtitle>Téléphone</mat-card-subtitle>
   </mat-card>
-  <mat-card class="form-card">
+  <mat-card class="form-card" formGroupName="loginInfo">
     <mat-card-subtitle>Informations de connexion</mat-card-subtitle>
   </mat-card>
   @if (mainForm.valid) {
     <mat-card-actions>
-      <button mat-flat-button color="primary" (click)="onSubmitForm()">ENREGISTRER</button>
+      <button mat-flat-button>ENREGISTRER</button>
     </mat-card-actions>
   }
 </mat-card>

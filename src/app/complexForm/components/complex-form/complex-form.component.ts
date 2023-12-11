@@ -3,11 +3,12 @@ import {CommonModule} from '@angular/common';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
 
 @Component({
   selector: 'app-complex-form',
   standalone: true,
-  imports: [CommonModule, MatCardModule, ReactiveFormsModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, ReactiveFormsModule, MatButtonModule, MatInputModule],
   templateUrl: './complex-form.component.html',
   styleUrl: './complex-form.component.scss'
 })
