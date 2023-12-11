@@ -23,8 +23,6 @@ export class PostListItemComponent implements OnInit {
   @Output()
   postCommented = new EventEmitter<{ comment: string, postId: number }>();
 
-  tempUser = {firstName: "Franck", lastName: "Pedron"};
-
   ngOnInit(): void {
   }
 

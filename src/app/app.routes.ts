@@ -6,6 +6,10 @@ export const routes: Routes = [
     loadChildren: () => import('./social-media/social-media-routes')
   },
   {
+    path: 'complex-form',
+    loadChildren: () => import('./complexForm/complex-form-routes')
+  },
+  {
     path: '**',
     redirectTo: 'social-media'
   }
