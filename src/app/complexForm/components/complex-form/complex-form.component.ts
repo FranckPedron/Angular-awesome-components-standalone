@@ -8,6 +8,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {map, Observable, startWith, tap} from "rxjs";
 import {ComplexFormService} from "../../services/complex-form.service";
+import {confirmEqualValidator} from "../../validators/confirm-equal.validator";
 
 @Component({
   selector: 'app-complex-form',
@@ -65,7 +66,9 @@ export class ComplexFormComponent implements OnInit {
     this.emailForm = this.formBuilder.group({
       email: this.emailCtrl,
       confirm: this.confirmEmailCtrl
-    })
+    }, {
+      validators: [confirmEqualValidator('email', 'confirm')]
+    });
     this.phoneCtrl = this.formBuilder.control('');
     this.passwordCtrl = this.formBuilder.control('', Validators.required);
     this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
@@ -73,7 +76,9 @@ export class ComplexFormComponent implements OnInit {
       username: ['', Validators.required],
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl
-    })
+    }, {
+      validators: [confirmEqualValidator('password', 'confirmPassword')]
+    });
   }
 
   onSubmitForm() {
