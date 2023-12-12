@@ -18,6 +18,7 @@
       <mat-radio-button value="phone">Téléphone</mat-radio-button>
     </mat-radio-group>
   </mat-card>
+  @if (showEmailCtrl$ | async) {
   <mat-card class="form-card" [formGroup]="emailForm">
     <mat-card-subtitle>Email</mat-card-subtitle>
     <div class="form-row">
@@ -29,12 +30,15 @@
         <input type="text" matInput formControlName="confirm"></mat-form-field>
     </div>
   </mat-card>
+  }
+  @if (showPhoneCtrl$ | async){
   <mat-card class="form-card" formGroupName="phone">
     <mat-card-subtitle>Téléphone</mat-card-subtitle>
     <mat-form-field appearance="fill">
       <mat-label>Téléphone</mat-label>
       <input type="text" matInput [formControl]="phoneCtrl"></mat-form-field>
   </mat-card>
+  }
   <mat-card class="form-card" formGroupName="loginInfo">
     <mat-card-subtitle>Informations de connexion</mat-card-subtitle>
     <mat-form-field appearance="fill">

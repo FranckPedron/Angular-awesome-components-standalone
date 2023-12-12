@@ -5,6 +5,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatRadioModule} from "@angular/material/radio";
+import {map, Observable, startWith} from "rxjs";
 
 @Component({
   selector: 'app-complex-form',
@@ -26,12 +27,16 @@ export class ComplexFormComponent implements OnInit {
   passwordCtrl!: FormControl;
   confirmPasswordCtrl!: FormControl;
 
+  showEmailCtrl$!: Observable<boolean>;
+  showPhoneCtrl$!: Observable<boolean>;
+
   constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     this.initFormControls();
     this.initMainForm();
+    this.initFormObservables();
   }
 
   private initMainForm(): void {
@@ -67,6 +72,17 @@ export class ComplexFormComponent implements OnInit {
   }
 
   onSubmitForm() {
-console.log(this.mainForm.value);
+    console.log(this.mainForm.value);
+  }
+
+  private initFormObservables() {
+    this.showEmailCtrl$ = this.contactPreferenceCtrl.valueChanges.pipe(
+      startWith(this.contactPreferenceCtrl.value),
+      map(preference => preference === 'email'),
+    );
+    this.showPhoneCtrl$ = this.contactPreferenceCtrl.valueChanges.pipe(
+      startWith(this.contactPreferenceCtrl.value),
+      map(preference => preference === 'phone')
+    );
   }
 }
