@@ -4,11 +4,12 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} fr
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {MatRadioModule} from "@angular/material/radio";
 
 @Component({
   selector: 'app-complex-form',
   standalone: true,
-  imports: [CommonModule, MatCardModule, ReactiveFormsModule, MatButtonModule, MatInputModule],
+  imports: [CommonModule, MatCardModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatRadioModule],
   templateUrl: './complex-form.component.html',
   styleUrl: './complex-form.component.scss'
 })
@@ -66,6 +67,6 @@ export class ComplexFormComponent implements OnInit {
   }
 
   onSubmitForm() {
-
+console.log(this.mainForm.value);
   }
 }
