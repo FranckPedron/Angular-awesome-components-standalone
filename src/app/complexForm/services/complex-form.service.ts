@@ -5,7 +5,7 @@ import {ComplexFormValue} from "../models/complex-form-value.model";
 import {environment} from "../../../environements/environment";
 
 @Injectable()
-export class ComplexFormServiceService {
+export class ComplexFormService {
 
   constructor(private http: HttpClient) {
   }

@@ -5,12 +5,14 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {map, Observable, startWith, tap} from "rxjs";
+import {ComplexFormService} from "../../services/complex-form.service";
 
 @Component({
   selector: 'app-complex-form',
   standalone: true,
-  imports: [CommonModule, MatCardModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatRadioModule],
+  imports: [CommonModule, MatCardModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatRadioModule, MatProgressSpinnerModule],
   templateUrl: './complex-form.component.html',
   styleUrl: './complex-form.component.scss'
 })
@@ -30,7 +32,10 @@ export class ComplexFormComponent implements OnInit {
   showEmailCtrl$!: Observable<boolean>;
   showPhoneCtrl$!: Observable<boolean>;
 
-  constructor(private formBuilder: FormBuilder) {
+  loading!: boolean;
+
+  constructor(private formBuilder: FormBuilder,
+              private complexFormService: ComplexFormService) {
   }
 
   ngOnInit() {
@@ -72,7 +77,22 @@ export class ComplexFormComponent implements OnInit {
   }
 
   onSubmitForm() {
-    console.log(this.mainForm.value);
+    this.loading = true;
+    this.complexFormService.saveUserInfo(this.mainForm.value).pipe(
+      tap(saved => {
+        this.loading = false;
+        if (saved) {
+          this.resetForm();
+        } else {
+          console.error('Echec de l\'enregistrement');
+        }
+      })
+    ).subscribe();
+  }
+
+  private resetForm() {
+    this.mainForm.reset();
+    this.contactPreferenceCtrl.patchValue('email');
   }
 
   private initFormObservables() {
@@ -123,3 +143,4 @@ export class ComplexFormComponent implements OnInit {
     }
   }
 }
+

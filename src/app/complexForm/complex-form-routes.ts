@@ -1,12 +1,12 @@
 import {Routes} from "@angular/router";
 import {ComplexFormComponent} from "./components/complex-form/complex-form.component";
-import {ComplexFormServiceService} from "./services/complex-form-service.service";
+import {ComplexFormService} from "./services/complex-form.service";
 
 export default [
   {
     path: '',
     providers: [
-      ComplexFormServiceService
+      ComplexFormService
     ],
     component: ComplexFormComponent
   }
