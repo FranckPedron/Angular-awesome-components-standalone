@@ -11,7 +11,7 @@ import {ComplexFormService} from "../../services/complex-form.service";
 import {confirmEqualValidator} from "../../validators/confirm-equal.validator";
 
 @Component({
-  selector: 'app-complex-form',
+  selector: 'complex-form',
   standalone: true,
   imports: [CommonModule, MatCardModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatRadioModule, MatProgressSpinnerModule],
   templateUrl: './complex-form.component.html',
@@ -29,11 +29,12 @@ export class ComplexFormComponent implements OnInit {
   loginInfoForm!: FormGroup;
   passwordCtrl!: FormControl;
   confirmPasswordCtrl!: FormControl;
+  loading!: boolean;
 
   showEmailCtrl$!: Observable<boolean>;
   showPhoneCtrl$!: Observable<boolean>;
-
-  loading!: boolean;
+  showEmailError$!: Observable<boolean>;
+  showPasswordError$!: Observable<boolean>;
 
   constructor(private formBuilder: FormBuilder,
               private complexFormService: ComplexFormService) {
@@ -67,7 +68,8 @@ export class ComplexFormComponent implements OnInit {
       email: this.emailCtrl,
       confirm: this.confirmEmailCtrl
     }, {
-      validators: [confirmEqualValidator('email', 'confirm')]
+      validators: [confirmEqualValidator('email', 'confirm')],
+      updateOn: "blur"
     });
     this.phoneCtrl = this.formBuilder.control('');
     this.passwordCtrl = this.formBuilder.control('', Validators.required);
@@ -77,7 +79,8 @@ export class ComplexFormComponent implements OnInit {
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl
     }, {
-      validators: [confirmEqualValidator('password', 'confirmPassword')]
+      validators: [confirmEqualValidator('password', 'confirmPassword')],
+      updateOn: "blur"
     });
   }
 
@@ -110,6 +113,18 @@ export class ComplexFormComponent implements OnInit {
       startWith(this.contactPreferenceCtrl.value),
       map(preference => preference === 'phone'),
       tap(showPhoneCtrl => this.setPhoneValidators(showPhoneCtrl))
+    );
+    this.showEmailError$ = this.emailForm.statusChanges.pipe(
+      map(status => status === 'INVALID'
+        && this.emailCtrl.value
+        && this.confirmEmailCtrl.value)
+    );
+    this.showPasswordError$ = this.loginInfoForm.statusChanges.pipe(
+      map(status => status === 'INVALID'
+        && this.passwordCtrl.value
+        && this.confirmPasswordCtrl.value
+        && this.loginInfoForm.hasError('confirmEqual')
+      )
     );
   }
 
