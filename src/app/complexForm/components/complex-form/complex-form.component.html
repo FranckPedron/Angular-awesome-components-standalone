@@ -77,10 +77,10 @@
   </mat-card>
   @if (mainForm.valid) {
     <mat-card-actions>
-      <button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">ENREGISTRER</button>
+      <button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading()">ENREGISTRER</button>
     </mat-card-actions>
   }
-  @if (loading) {
+  @if (loading()) {
     <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
   }
 </mat-card>

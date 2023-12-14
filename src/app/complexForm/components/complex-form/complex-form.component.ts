@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
@@ -29,12 +29,13 @@ export class ComplexFormComponent implements OnInit {
   loginInfoForm!: FormGroup;
   passwordCtrl!: FormControl;
   confirmPasswordCtrl!: FormControl;
-  loading!: boolean;
 
   showEmailCtrl$!: Observable<boolean>;
   showPhoneCtrl$!: Observable<boolean>;
   showEmailError$!: Observable<boolean>;
   showPasswordError$!: Observable<boolean>;
+
+  loading = signal(false);
 
   constructor(private formBuilder: FormBuilder,
               private complexFormService: ComplexFormService) {
@@ -85,10 +86,10 @@ export class ComplexFormComponent implements OnInit {
   }
 
   onSubmitForm() {
-    this.loading = true;
+    this.loading.set(true);
     this.complexFormService.saveUserInfo(this.mainForm.value).pipe(
       tap(saved => {
-        this.loading = false;
+        this.loading.set(false);
         if (saved) {
           this.resetForm();
         } else {
@@ -109,6 +110,8 @@ export class ComplexFormComponent implements OnInit {
       map(preference => preference === 'email'),
       tap(showEmailCtrl => this.setEmailValidators(showEmailCtrl))
     );
+
+
     this.showPhoneCtrl$ = this.contactPreferenceCtrl.valueChanges.pipe(
       startWith(this.contactPreferenceCtrl.value),
       map(preference => preference === 'phone'),
